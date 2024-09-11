@@ -67,13 +67,10 @@ public class Post implements HasPost, Comparable<Post> {
      public boolean isShared() {
     	 return shared;
      }
-     public void setShared(boolean boo) {
-    	 this.shared = boo;
-     }
-     
-     
-   
-     
+     public void setShared() {
+    	    this.shared ^= true; // XOR operator to Toggles the boolean
+    }
+
      public void addL1tagsGroup(String tags) {
          this.L1tagsGroup.add(tags);
      }

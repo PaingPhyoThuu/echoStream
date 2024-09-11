@@ -13,7 +13,7 @@ public class User {
 	
 	public User(String[] tags, List<Post> posts) {
 		this.userId = userCount++;
-		this.userTags = tags;
+		this.setUserTags(tags);
 		this.userTagString = String.join("", tags);
 		this.activePosts = posts;
 	}
@@ -27,15 +27,33 @@ public class User {
 	}
 	
 	public void sharePosts(List<Post> sharedPosts) {
-	    int limit = Math.min(activePosts.size(), 4);
-	    for (int i = 0; i < limit; i++) {
+		
+//		System.out.print("Key: " + this.getUserTagString() + " ");      
+//        System.out.println("id: " + this.getUserId() + ", ");
+		
+	    int postcount = 0;
+	    for (int i = 0; i < activePosts.size(); i++) {
 	        Post post = activePosts.get(i);
-	        if (!post.isShared()) {
+	        post.setShared();
+	        if (post.isShared()) {
 	            sharedPosts.add(post);
-	            post.setShared(true);
+	            if(++postcount == 3) {
+	            	break;
+	            }
+	            
 	        }
+	        
 	    }
 	}
+
+	public String[] getUserTags() {
+		return userTags;
+	}
+
+	public void setUserTags(String[] userTags) {
+		this.userTags = userTags;
+	}
+	
 
 }
 
